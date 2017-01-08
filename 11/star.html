@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评价</title>
+    <style>
+        * { padding: 0; margin: 0;}
+        span,#starBox { display: inline-block;}
+        #starBox{ padding-top: 4px;}
+        #starBox div{ width: 20px; height: 20px; display: inline-block; background: url("11/images/star.png") center 2px no-repeat; padding: 0 4px; cursor: pointer;}
+    </style>
+</head>
+<body>
+    <span>星级评价:</span><div id="starBox">
+    </div>
+<script>
+    var oBox = document.getElementById('starBox')
+    for(var i = 0; i < 5; i++){
+        oBox.innerHTML += '<div></div>';
+    }
+    var oBoxLi = document.querySelectorAll('#starBox div');
+    var index = 0; //获得打星数量
+    for(var i = 0; i < oBoxLi.length ; i++) {
+        oBoxLi[i].num = i;
+        //鼠标移入评分上
+        oBoxLi[i].onmouseenter = function () {
+            for(var j = 0; j <= this.num; j++) {
+                oBoxLi[j].style.backgroundPosition = 'center -26px';
+            }
+        };
+        //鼠标移出评分上
+        oBoxLi[i].onmouseleave = function () {
+            for (var j = index; j < oBoxLi.length- 1; j++) {
+                oBoxLi[j+1].style.backgroundPosition = 'center 2px';
+            }
+        };
+        //鼠标点击评分上
+        oBoxLi[i].onclick = function () {
+            index = this.num;
+            for(var j = 0; j <= oBoxLi.length; j++) {
+                if( j < index) {
+                    oBoxLi[j].style.backgroundPosition = 'center -26px';
+                }
+            }
+        };
+
+    }
+</script>
+</body>
+</html>

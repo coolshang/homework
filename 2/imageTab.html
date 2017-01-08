@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片切换</title>
+    <style>
+        #box { width: 326px; height: 204px; overflow:hidden;}
+        #box img{ cursor:pointer;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img id="image" src="images/1.jpg">
+    </div>
+<script>
+    var oImg = document.getElementById('image');
+    var arr = ['images/1.jpg','images/2.jpg'];
+    var url = '';
+    oImg.onclick = function () {
+        if( url == arr[1]){
+            this.src = arr[0];
+            url = arr[0];
+        } else {
+            this.src = arr[1];
+            url = arr[1];
+        }
+    }
+
+</script>
+</body>
+</html>

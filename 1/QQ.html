@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QQ空间左侧导航</title>
+    <style>
+        * { margin: 0; padding: 0; font-size: 14px;}
+        ul,li{ list-style: none; margin: 0; padding: 0;}
+        #menu { width: 168px; border:1px solid #ddd; margin-left:120px; position: relative;  height: 140px; overflow:hidden;}
+        h2{ height: 30px; line-height: 30px; background: #eee; padding-left: 20px; width: 144px; margin:0 auto;}
+        h2 i { display: inline-block; width: 18px; height:18px;background:url("images/qqbg.png") -380px -156px no-repeat; position: relative; top: 6px; margin-right: 8px;}
+        #nav{  width: 164px; margin: 0 auto;}
+        #nav li{ height: 30px; line-height: 30px; font-size: 12px;padding-left: 10px; cursor:pointer;}
+        #nav li i { display: inline-block; width: 18px; height: 18px; background-image: url("images/qqbg.png"); position: relative; top: 5px; margin-right: 8px;}
+        #nav li:nth-of-type(1) i{ background-position:-198px -50px;}
+        #nav li:nth-of-type(2) i{ background-position:-276px -285px;}
+        #nav li:nth-of-type(3) i{ background-position:-562px -51px;}
+        #nav li:nth-of-type(4) i{ background-position:-250px -26px;}
+        #nav li:nth-of-type(5) i{ background-position:-484px -233px;}
+        #nav li:nth-of-type(6) i{ background-position:-536px -260px;}
+        #nav li:nth-of-type(7) i{ background-position:-561px -184px;}
+        #nav li:nth-of-type(8) i{ background-position:-563px -285px;}
+        #nav li:nth-of-type(9) i{ background-position:-589px -1px;}
+        #nav li:nth-of-type(10) i{ background-position:-511px -182px;}
+        #nav li:nth-of-type(11) i{ background-position:-511px -231px;}
+        #nav li:hover{ background: #eee;}
+        #btn{ width: 168px; height: 20px; background: url("images/but.jpg") no-repeat; position: absolute; bottom: 0; margin-top:-30px; left: 0; cursor:pointer;}
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <h2><i></i>好友动态</h2>
+        <ul id="nav">
+            <li><i></i>特别关心</li>
+            <li><i></i>与我相关</li>
+            <li><i></i>直播广场</li>
+            <li><i></i>那年今日</li>
+            <li><i></i>游戏应用</li>
+            <li><i></i>我的收藏</li>
+            <li><i></i>微云备份</li>
+            <li><i></i>企鹅FM</li>
+            <li><i></i>QQ阅读</li>
+            <li><i></i>实名朋友</li>
+            <li><i></i>认证空间</li>
+        </ul>
+        <div id="btn"></div>
+    </div>
+<script>
+    var oMenu = document.getElementById('menu');
+    var oBtn = document.getElementById('btn');
+    //点击显示更多内容
+    oBtn.onclick = function(){
+        oMenu.style.height = 'auto';
+        this.style.display = 'none';
+    }
+
+</script>
+</body>
+</html>
