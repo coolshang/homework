@@ -5,37 +5,52 @@
     <title>评价</title>
     <style>
         * { padding: 0; margin: 0;}
-        span,#starBox { display: inline-block;}
+        span,#starBox,#tips { float: left;}
+        span{ height: 30px; line-height: 30px;}
         #starBox{ padding-top: 4px;}
-        #starBox div{ width: 20px; height: 20px; display: inline-block; background: url("11/images/star.png") center 2px no-repeat; padding: 0 4px; cursor: pointer;}
+        #tips{ width: 120px; height: 100px; border: 1px solid #eee; position: relative; top: 10px;}
+        #starBox div{ width: 20px; height: 20px; display: inline-block; background: url("images/star.png") center 2px no-repeat; padding: 0 4px; cursor: pointer;}
     </style>
 </head>
 <body>
-    <span>星级评价:</span><div id="starBox">
-    </div>
+<span>星级评价:</span><div id="starBox">
+</div>
+<div id="tips"></div>
 <script>
-    var oBox = document.getElementById('starBox')
+    var oBox = document.getElementById('starBox');
+    var oTips = document.getElementById('tips');
     for(var i = 0; i < 5; i++){
         oBox.innerHTML += '<div></div>';
     }
     var oBoxLi = document.querySelectorAll('#starBox div');
-    var index = 0; //获得打星数量
+    var index = 0; //获得打星数量;
+    var bool = false; //判断index是否有值
     for(var i = 0; i < oBoxLi.length ; i++) {
         oBoxLi[i].num = i;
         //鼠标移入评分上
         oBoxLi[i].onmouseenter = function () {
+            tips(this.num+1);
             for(var j = 0; j <= this.num; j++) {
                 oBoxLi[j].style.backgroundPosition = 'center -26px';
             }
         };
         //鼠标移出评分上
         oBoxLi[i].onmouseleave = function () {
-            for (var j = index; j < oBoxLi.length- 1; j++) {
-                oBoxLi[j+1].style.backgroundPosition = 'center 2px';
+            console.log(this.num)
+            var j = index;
+            if(bool) {
+                j = index + 1;
+                tips(index+1);
+            } else {
+                tips(index);
+            }
+            for (j; j < oBoxLi.length; j++) {
+                oBoxLi[j].style.backgroundPosition = 'center 2px';
             }
         };
         //鼠标点击评分上
         oBoxLi[i].onclick = function () {
+            bool= true;
             index = this.num;
             for(var j = 0; j <= oBoxLi.length; j++) {
                 if( j < index) {
@@ -43,8 +58,31 @@
                 }
             }
         };
-
     }
+    function tips(index) {
+        switch(index) {
+            case 1:
+                oTips.innerHTML = '很差';
+                break;
+            case 2:
+                oTips.innerHTML = '较差';
+                break;
+            case 3:
+                oTips.innerHTML = '还行';
+                break;
+            case 4:
+                oTips.innerHTML = '推荐';
+                break;
+            case 5:
+                oTips.innerHTML = '力荐';
+                break;
+            default:
+                oTips.innerHTML = '提示:请认真给当前文章打分！';
+                break;
+
+        }
+    }
+    tips(index);
 </script>
 </body>
 </html>
