@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        ul,li { list-style: none;}
+        .container { width: 326px; margin: 0 auto; overflow: hidden; position: relative;}
+        #imgs { position: relative; width:1630px;}
+        #imgs img { float: left;}
+        #btns { position: absolute; bottom : 20px; left: 50%; margin-left: -65px;}
+        #btns li { width: 16px; height: 16px; border-radius: 100%; background: #ddd; float: left; margin: 0 5px; cursor: pointer; z-index: 10;}
+        #btns li.no { background: #757575;}
+        #lf { position: absolute; top: 50%; left: 0; width: 30px; height: 18px; background: rgba(0,0,0,.4); color: #fff; text-align: center; line-height: 18px; margin-top: -9px; cursor: pointer;}
+        #rt { position: absolute; top: 50%; right: 0;width: 30px; height: 18px; background: rgba(0,0,0,.4); color: #fff; text-align: center; line-height: 18px; margin-top: -9px; cursor: pointer;}
+        #lf:hover,#rt:hover{ background: rgba(0,0,0,.8);}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="imgs">
+            <img src="images/m1.jpg" height="204" width="326"/>
+            <img src="images/m2.jpg" height="204" width="326"/>
+            <img src="images/m3.jpg" height="204" width="326"/>
+            <img src="images/m4.jpg" height="204" width="326"/>
+            <img src="images/m5.jpg" height="204" width="326"/>
+        </div>
+        <ul id="btns">
+        </ul>
+        <div id="lf">&lt;</div>
+        <div id="rt">&gt;</div>
+    </div>
+<script>
+    var oImgs = document.querySelector('#imgs');
+    var oImgList = document.querySelectorAll('#imgs img');
+    var oBtn = document.getElementById('btns');
+    var oLf = document.getElementById('lf');
+    var oRt = document.getElementById('rt');
+    var num = 0;
+    //根据图片个数循环输出切换的点数
+    for(var i  = 0; i < oImgList.length ; i++) {
+        if( i == 0) {
+            oBtn.innerHTML += '<li class="no"></li>';
+        } else {
+            oBtn.innerHTML += '<li></li>';
+        }
+    };
+    var oBtns = document.querySelectorAll('#btns li');
+    for(var i  = 0; i < oImgList.length ; i++) {
+        oBtns[i].no = i;
+        //点击下面的按钮,切换相应的图片
+        oBtns[i].onclick = function () {
+            func(this.no);
+        }
+    };
+    //左边按钮
+    oLf.onclick = function () {
+        num--;
+        if( num >= 0) {
+            func(num);
+        } else {
+            num = oBtns.length -1;
+            func(num);
+        };
+    };
+    //右边按钮
+    oRt.onclick = function () {
+        num++;
+        if( num < oBtns.length) {
+            func(num);
+        } else {
+            num = 0;
+            func(num);
+        }
+    };
+    //执行函数
+    function func(index) {
+        for (var i = 0; i < oBtns.length; i++) {
+            if (index == i) {
+                oBtns[index].className = 'no';
+                oImgs.style.marginLeft = '-' + (326 * index) + 'px';
+            } else {
+                oBtns[i].className = ' ';
+            }
+        };
+    }
+</script>
+</body>
+</html>

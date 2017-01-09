@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击修改内容</title>
+    <style>
+        ul,li{ list-style: none;}
+        #lists li{ border-bottom: 1px solid red; padding: 10px 0;}
+        #lists li input{ width:auto;}
+        #lists li input.on:disabled{ background: transparent; border: none;}
+    </style>
+</head>
+<body>
+<ul id="lists">
+    <li>
+        <input type="text" value="12313123132">
+        <button>button</button>
+    </li>
+    <li>
+        <input type="text" value="12313123132">
+        <button>button</button>
+    </li>
+    <li>
+        <input type="text" value="12313123132">
+        <button>button</button>
+    </li>
+</ul>
+<script>
+    var listInput = document.querySelectorAll('#lists li input');
+    var listBtn = document.querySelectorAll('#lists li button');
+    for(var i =0; i < listInput.length ; i++ ) {
+        listBtn[i].no = i;
+        listBtn[i].bool = true;
+        listInput[i].disabled = true;
+        listInput[i].className = 'on';
+        listBtn[i].onclick = function () {
+            listInput[this.no].style.width = listInput[this.no].value.length*7+'px';
+            if(!listBtn[this.no].bool) {
+                listBtn[this.no].innerHTML = 'button';
+                listInput[this.no].className = 'on';
+                listInput[this.no].disabled = true;
+                listBtn[this.no].bool = !listBtn[this.no].bool;
+            } else {
+                listBtn[this.no].innerHTML = '确认';
+                listInput[this.no].className = '';
+                listInput[this.no].disabled = false;
+                listBtn[this.no].bool = !listBtn[this.no].bool;
+            }
+        }
+    }
+</script>
+</body>
+</html>
