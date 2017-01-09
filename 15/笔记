@@ -1,0 +1,33 @@
+str.charAt(0)通过下标获取对应的那个字符。兼容所有浏览器
+str.charCodeAt(2)通过下标获取对应的那个字符的ANSII码
+String.fromCharCod(3) 通过ANSII码返回ANSII码对应的字符
+str.indexOf('') 获得某个字符串首次出现的下标。如果没找到返回-1，找到返回字符下标
+str.substring(0,5) 切割字符串，从0-5.包括0不包括5。参数可以调换位置。参数为负数时自动为0。
+str.slice(0,5) 同上。参数可以为负数，参数大小不能调换位置。参数可以为负数，表示倒着计数
+str.split('') 以''里面的条件分割str返回一个数组
+str.toUpperCase() 将字母全部转换为大写
+str.toLowerCase() 将字母全部转换为小写
+数组
+字符串只可读
+arr.length 获取数组的长度
+arr.push(); 向数组最后面添加内容
+arr.unshift(); 向最前面添加内容
+arr.pop()  删除数组最后一个数据
+arr.shift() 删除数组第一个数据
+arr.splice(); 从 第几个开始 ，删除 多少位
+arr.splice(1,0,'添加的内容',50,true) 从第三位开始后面都是添加的内容
+arr.sort() 数组排序
+倒序
+arr.sort(function(x,y){
+    return y-x;
+})
+顺序
+arr.sort(function(x,y){
+    return x-y;
+})
+arr.join('<-->'); 将数组拼接成一个字符串并将<-->形式连接
+concat() 方法用于连接两个或多个数组。
+如何将二个数组拼接成一个字符串：
+var arr1 = [1,2,3];
+var arr2 = [4,5];
+var newA = arr1.concat(arr2);
