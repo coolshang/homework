@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字展开和收缩</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        .container{ width: 400px; background: #eee; border:1px solid #757575; margin: 20px auto; padding: 10px; }
+        #btn{ cursor: pointer; color:blue;}
+        #btn:hover{ text-decoration: underline;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content">
+            百度百科是百度公司推出的一部内容开放、自由的网络百科全书平台。其测试版于2006年4月20日上线，正式版在2008年4月21日发布，截至2016年4月，百度百科已经收录了超过1300多万的词条，参与词条编辑的网友超过580万人，几乎涵盖了所有已知的知识领域。
+        </div>
+        <div id="btn">[展开]</div>
+    </div>
+    <script>
+        var oCon = document.getElementById('content');
+        var oBtn = document.getElementById('btn');
+        var text = oCon.innerHTML;
+        var str = oCon.innerHTML.substring(0,40);
+        oCon.innerHTML = str;
+        var bool = true;
+        oBtn.onclick = function () {
+            if(bool){
+                oBtn.innerHTML = '[收缩]';
+                oCon.innerHTML = text.substring(0,text.length);
+                bool = !bool;
+            } else {
+                oBtn.innerHTML = '[展开]';
+                oCon.innerHTML = str;
+                bool = !bool;
+            }
+        }
+    </script>
+</body>
+</html>

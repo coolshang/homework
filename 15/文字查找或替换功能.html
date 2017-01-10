@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字查找或替换功能</title>
+    <style>
+        *{ padding: 0; margin: 0;}
+        .container{ width: 1100px; margin: 20px auto;}
+        #btns input{ margin: 0 20px;}
+        #content { margin: 10px 0; border: 1px solid #757575; padding: 5px; font-size: 14px;}
+        #content span{ color: red; font-size: 16px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="btns">
+            <input type="text" value="百度" id="searchInput"><input type="text" id="replaceInput"><input type="button" value="查找" id="searchBtn"><input type="button" value="替换" id="replaceBtn">
+        </div>
+        <div id="content">
+            百度百科是百度公司推出的一部内容开放、自由的网络百科全书平台。其测试版于2006年4月20日上线，正式版在2008年4月21日发布，截至2016年4月，百度百科已经收录了超过1300多万的词条，参与词条编辑的网友超过580万人，几乎涵盖了所有已知的知识领域。
+            百度百科旨在创造一个涵盖各领域知识的中文信息收集平台。百度百科强调用户的参与和奉献精神，充分调动互联网用户的力量，汇聚上亿用户的头脑智慧，积极进行交流和分享。同时，百度百科实现与百度搜索、百度知道的结合，从不同的层次上满足用户对信息的需求。
+        </div>
+    </div>
+    <script>
+        var oCon = document.getElementById('content');
+        var searchInput = document.getElementById('searchInput');
+        var replaceInput = document.getElementById('replaceInput');
+        var searchBtn = document.getElementById('searchBtn');
+        var replaceBtn = document.getElementById('replaceBtn');
+        //查找
+        searchBtn.onclick = function () {
+            var text = oCon.innerHTML.split(searchInput.value).join('<span>'+searchInput.value+'</span>');
+            oCon.innerHTML = text;
+        };
+        //替换
+        replaceBtn.onclick = function () {
+            var text = oCon.innerHTML.split(searchInput.value).join('<span>'+replaceInput.value+'</span>');
+            oCon.innerHTML = text;
+        };
+    </script>
+</body>
+</html>

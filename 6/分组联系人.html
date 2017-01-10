@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联系人列表</title>
+    <style>
+        * { margin: 0; padding: 0 ;}
+        ul,li{ list-style: none;}
+        .menu { margin: 40px 0 0 60px; width: 160px; border: 1px solid #ddd;}
+        .menu ul { height: 25px; overflow: hidden;}
+        .menu ul li{  font-size: 14px; text-indent: 2.4em; line-height: 24px; border-bottom: 1px solid #ddd; cursor: pointer;}
+        .menu ul .title { font-size: 16px; text-indent: 2em; background: #ff6600; color: #fff;}
+        .menu ul li:hover{ background: #ff6600;}
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li class="title">同事</li>
+            <li>小蔡</li>
+            <li>小陈</li>
+            <li>小燕</li>
+        </ul>
+        <ul class="lists">
+            <li class="title">朋友</li>
+            <li>狗蛋</li>
+            <li>阿猫</li>
+            <li>张三</li>
+            <li>李四</li>
+        </ul>
+        <ul>
+            <li class="title">陌生人</li>
+            <li>李梅</li>
+            <li>委屈</li>
+            <li>里欧</li>
+            <li>篮球</li>
+            <li>老街</li>
+        </ul>
+    </div>
+    <script>
+        var lists = document.querySelectorAll('.menu ul');
+        for(var i = 0 ; i < lists.length ; i++) {
+             lists[i].no = i;
+            lists[i].onclick = function () {
+                for(var i = 0; i < lists.length ; i ++) {
+                    if(i == this.no) {
+                        lists[i].style.height = 'auto';
+                    } else {
+                        lists[i].style.height = '25px';
+
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QQ说说发表功能</title>
+    <style>
+        * { margin: 0 ; padding: 0;}
+        ul,li{ list-style: none;}
+        .container{ width: 580px; margin: 0 auto;}
+        #box{ background: #f0f0f0; padding: 10px 0; margin-top: 40px;}
+        #inputText{ width: 90%; height: 80px; margin: 0 auto; display: block; resize: none;}
+        .userInfo{ overflow: hidden; padding: 10px 0; width: 90%; margin: 0 auto;}
+        .userInfo img{  width: 36px; height: 36px; float: left; cursor: pointer;}
+        #publishBtn{ padding: 4px 20px; color: #fff; background: #ff6600; border:0; border-radius: 4px; height: 30px; float: right; cursor: pointer;}
+        #msgBox li{ border-bottom: 1px solid #eee; padding: 20px 0; vertical-align: top;}
+        #msgBox li span{ display: inline-block; vertical-align: top; margin-left: 4px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="box">
+            <textarea id="inputText" type="text"></textarea>
+            <div class="userInfo">
+                <img id="img" src="images/bq1.png">
+                <input id="publishBtn" type="button" value="发表">
+            </div>
+        </div>
+        <ul id="msgBox">
+        </ul>
+    </div>
+    <script>
+        var oValue = document.getElementById('inputText');
+        var oImg = document.getElementById('img');
+        var oBtn = document.getElementById('publishBtn');
+        var oMsgBox = document.getElementById('msgBox');
+        var arr = ['images/bq1.png','images/bq2.png'];
+        var bool = false;
+        oBtn.onclick = function() {
+            if (oValue.value){
+                oMsgBox.innerHTML += '<li><img src="' + oImg.src + '"><span>' + oValue.value + '</span></li>';
+            } else {
+                alert('请输入内容!');
+            }
+        };
+        oImg.onclick = function () {
+                if(bool){
+                    oImg.src = arr[0];
+                    bool = false;
+                }else {
+                    oImg.src = arr[1];
+                    bool = true;
+                };
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>360左侧导航</title>
+    <style>
+        * { margin: 0 ; padding: 0;}
+        html,body { height: 100%; width: 100%;}
+        .menu { width: 50px; background: #757575; height: 100%;}
+        #lists { padding: 140px 0 ;}
+        #lists li img{ display: block; margin: 10px auto;}
+        #btn { width: 50px; height: 50px; background: url("images/icon.png") 0 -60px no-repeat; margin-top: 80px; cursor: pointer; position: fixed;}
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <ul id="lists">
+            <li><img src="images/bq1.png"></li>
+            <li><img src="images/bq2.png"></li>
+            <li><img src="images/bq3.png"></li>
+            <li><img src="images/bq4.png"></li>
+            <li><img src="images/bq5.png"></li>
+        </ul>
+        <div id="btn"></div>
+    </div>
+    <script>
+        var oBtn = document.getElementById('btn');
+        var oMenu = document.querySelector('.menu');
+        var bool = false;
+        oBtn.onclick = function () {
+            if(bool){
+                oMenu.style.marginLeft = '0';
+                oBtn.style.backgroundPositionY='-60px';
+                oBtn.style.marginLeft = '0';
+            } else {
+                oBtn.style.marginLeft = '50px';
+                oBtn.style.backgroundPositionY='0';
+                oMenu.style.marginLeft = '-50px';
+            }
+            bool = !bool;
+        }
+    </script>
+</body>
+</html>
