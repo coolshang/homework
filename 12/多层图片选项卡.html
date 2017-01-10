@@ -12,9 +12,12 @@
         .left li{ background: #000; color: #fff; line-height: 51px; height: 51px; text-align: center; cursor: pointer;}
         .left li.on,.right li.on { background: #ff6600;}
         .right{ float: left; width: 326px; height: 204px;}
-        .right .show{ width: 326px; height: 204px; position: relative;}
+        .right .show{ width: 326px; height: 204px; position: relative; overflow: hidden;}
+        .right .showBox{position: absolute; left: 0; top: 0;}
+        .right .showBox img{ display: none;}
+        .right .showBox img.on{ display: block;}
         .items { position: absolute; overflow: hidden; bottom: 10px; right: 0;}
-        .items li{ width: 20px; height: 20px; background: #f0f0f0; line-height: 20px; float: left; margin: 0 5px; text-align: center;}
+        .items li{ width: 20px; height: 20px; background: #f0f0f0; line-height: 20px; float: left; margin: 0 5px; text-align: center; cursor:  pointer;}
     </style>
 </head>
 <body>
@@ -30,34 +33,44 @@
         <div class="right">
             <div class="show">
                 <div class="showBox">
-                    <img src="images/1.jpg"><img src="images/2.jpg"><img src="images/3.jpg"><img src="images/4.jpg">
+                    <img src="images/1.jpg" class="on"><img src="images/2.jpg"><img src="images/3.jpg"><img src="images/4.jpg">
                 </div>
             </div>
             <div class="show">
                 <div class="showBox">
-                    <img src="images/m1.jpg"><img src="images/m2.jpg"><img src="images/m3.jpg"><img src="images/m4.jpg"><img src="images/m5.jpg">
+                    <img src="images/m1.jpg" class="on"><img src="images/m2.jpg"><img src="images/m3.jpg"><img src="images/m4.jpg"><img src="images/m5.jpg">
                 </div>
             </div>
             <div class="show">
                 <div class="showBox">
-                    <img src="images/s1.jpg"><img src="images/s2.jpg"><img src="images/s3.jpg"><img src="images/s4.jpg"><img src="images/s5.jpg">
+                    <img src="images/s1.jpg" class="on"><img src="images/s2.jpg"><img src="images/s3.jpg"><img src="images/s4.jpg"><img src="images/s5.jpg">
                 </div>
             </div>
             <div class="show">
                 <div class="showBox">
-                    <img src="images/shop1.jpg"><img src="images/shop2.jpg"><img src="images/shop3.jpg"><img src="images/shop4.jpg">
+                    <img src="images/shop1.jpg" class="on"><img src="images/shop2.jpg"><img src="images/shop3.jpg"><img src="images/shop4.jpg">
                 </div>
             </div>
         </div>
     </div>
 <script>
     var show = document.querySelectorAll('.show');
-    var showBox = document.querySelectorAll('.showBox');
     var oLeft = document.querySelectorAll('.left li');
     for(var i = 0; i < show.length; i ++) {
-        showBox[i].style.width = showBox[i].children.length * 326 + 'px';
+        oLeft[i].no = i;
+        oLeft[i].onclick = function () {
+            for(var i = 0 ;i < oLeft.length ; i++) {
+                if(this.no == i) {
+                    oLeft[i].className = 'on';
+                    show[i].style.display = 'block';
+                } else {
+                    oLeft[i].className = '';
+                    show[i].style.display = 'none';
+                }
+            }
+        }
         var str = '<ul class="items">';
-        for(var j = 0 ; j < showBox[i].children.length ; j++){
+        for(var j = 0 ; j < show[i].querySelectorAll('.showBox img').length ; j++){
             if( j == 0) {
                 str += '<li class="on">' + (j + 1) + '</li>';
             } else {
@@ -66,18 +79,21 @@
         }
         str += '</ul>';
         show[i].innerHTML += str;
+        var oItems = show[i].querySelectorAll('.items li');
+        var oImgs = show[i].querySelectorAll('.showBox img');
+        func(oItems,oImgs);
     }
-    for(var i = 0; i < oLeft.length; i++) {
-        oLeft[i].no = i;
-        oLeft[i].onclick = function () {
-            for(var i = 0 ;i < oLeft.length ; i++) {
-                if(this.no == i) {
-                    show[i].style.display = 'block';
-                    oLeft[i].className = 'on';
-                } else {
-                    show[i].style.display = 'none';
-                    oLeft[i].className = '';
-                }
+    function func(btn,pic){
+        var length = btn.length;
+        var index = 0;
+        for (var i = 0 ; i < length ; i ++){
+            btn[i].no = i;
+            btn[i].onmouseenter = function(){
+                btn[index].className = '';
+                pic[index].className= '';
+                index =  this.no;
+                btn[index].className = 'on';
+                pic[index].className= 'on';
             }
         }
     }
