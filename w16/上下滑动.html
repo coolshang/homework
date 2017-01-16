@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上下滑动</title>
+    <style>
+        * { margin: 0; padding: 0; font-size: 14px; font-family: "Microsoft YaHei";}
+        .container { width: 320px; height: 568px; position: absolute; left: 50%; top: 50%; margin-left: -160px; margin-top: -244px; border: 1px solid #eee;}
+        #goTop,#goBottom{ width: 100%; height: 44px; line-height: 44px; color:#fff; text-align: center; font-size: 16px; background: #000; cursor: pointer;}
+        #content { width: 100%; height: 480px; position: relative; overflow: hidden;}
+        #listsBox{ position: absolute; top: 0; left: 0; width: 100%;}
+        .item{ width: 100%; overflow: hidden; height: 82px;}
+        .ilf { width: 40%; float: left;}
+        .ilf img{ width: 100%;}
+        .irt { margin-left: 4%; width: 56%; float: left;}
+        .irt p { font-size: 12px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="goTop">向上</div>
+        <div id="content">
+            <div id="listsBox">
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/s1.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/s2.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/s3.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/s4.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/s5.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/m1.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/m2.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/m3.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ilf">
+                        <img src="images/m4.jpg">
+                    </div>
+                    <div class="irt">
+                        <h2>流量</h2>
+                        <p>阿凡达法法师范德萨发啊啊刘鸥欧舒丹佛挡杀佛奇偶阿斯蒂芬打发的撒范德萨发大水发发的发的</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="goBottom">向下</div>
+    </div>
+<script>
+    var goTop = document.getElementById('goTop');
+    var goBottom = document.getElementById('goBottom');
+    var listsBox = document.getElementById('listsBox');
+    var items = document.querySelectorAll('.listsBox .item');
+    var num = 0;
+    var i = 1;
+    var html = listsBox.innerHTML;
+    goTop.onclick = function () {
+        funUp();
+    };
+    goBottom.onclick = function () {
+        funDown();
+    };
+    window.onkeydown = function (event) {
+        console.log(event.keyCode);
+        if(event.keyCode == 38){
+            funUp();
+        } else if(event.keyCode == 40){
+            funDown();
+        }
+    };
+    function funUp() {
+        var top = getStyle(listsBox,'top');
+        if(parseInt(top) <=0) {
+            num++;
+        }
+        listsBox.style.top = num+'px';
+    }
+    function funDown() {
+        var top = getStyle(listsBox,'top');
+            num--;
+        listsBox.style.top = num+'px';
+    }
+    function getStyle( obj , attr ) {
+        return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+    };
+</script>
+</body>
+</html>
