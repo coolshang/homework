@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>选择地址</title>
     <style>
-        * { margin: 0; padding: 0;}
+        * { margin: 0; padding: 0; text-underline: none;}
         ul,li { list-style: none;}
         li { display: inline-block;}
         li i{ border: 1px solid #ff6600;}
@@ -21,29 +21,28 @@
         var content = document.getElementById('content');
         var oBox = document.createElement('ul');
         oBox.id = 'box';
+        var bool = false;
         for(var i = 0 ; i < oName.length ; i++) {
             oName[i].on = i;
             oName[i].onclick = function () {
                 var oLi = document.createElement('li');
-                var oHtml  = document.createElement('strong');
+                var oHtml = document.createElement('strong');
                 var oDel = document.createElement('i');
                 oHtml.innerHTML = oName[this.on].innerHTML;
                 oDel.innerHTML = 'X';
-                var oBoxLi  = document.querySelectorAll('#box li');
-                console.log(oBoxLi.length);
-                var bool = false;
-                for(var i = 0 ; i <= oBoxLi.length; i++) {
-                    console.log(oBoxLi[i]);
-                    if(oBoxLi[i] != undefined) {
-                        if (oBoxLi[i].innerHTML != oName[this.on].innerHTML) {
-                            var html = oHtml.appendChild(oDel);
-                            console.log(html);
+                var oBoxLi = document.querySelectorAll('#box li');
+                console.log(oBoxLi);
+                for (var i = this.on; i <= oBoxLi.length; i++) {
+                    if (oBoxLi[i] != undefined) {
+                        if (oName[this.on].innerHTML !== oBoxLi[i].children[0].innerHTML) {
                             oLi.appendChild(oHtml);
+                            oLi.appendChild(oDel);
                             oBox.appendChild(oLi);
                         }
                     } else {
                         if (!bool) {
-                            oLi.appendChild(oHtml.appendChild(oDel));
+                            oLi.appendChild(oHtml);
+                            oLi.appendChild(oDel);
                             oBox.appendChild(oLi);
                         }
                         bool = true;
