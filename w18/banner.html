@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改变透明度</title>
+    <style>
+        ul,li{ list-style: none; margin: 0; padding: 0;}
+        #box{ width: 326px; margin: 0 auto; overflow:hidden;}
+        #img-content { position: relative; width: 326px; height: 204px;left: 0; top: 0;}
+        #img-content img{position: absolute;opacity :0; filter: alpha(opacity=0);}
+        #btns { position: absolute; bottom: 10px; left: 50%; margin-left: -60px;}
+        #btns li{ width: 14px; height: 14px; background: #a4a4a4; float: left; margin: 0 5px; border-radius: 100%;}
+        #btns li.on { background: red;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="img-content">
+            <img src="images/m1.jpg" alt="m1" style="opacity: 1;filter: alpha(opacity=100);">
+            <img src="images/m2.jpg" alt="m2">
+            <img src="images/m3.jpg" alt="m3">
+            <img src="images/m4.jpg" alt="m4">
+            <img src="images/m5.jpg" alt="m5">
+            <ul id="btns">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var oBox = document.getElementById('img-content');
+        var oImg = document.querySelectorAll('#img-content img');
+        var oLi = document.querySelectorAll('#btns li');
+        var speed = 0;
+        oLi[speed].className = 'on';
+        function play() {
+            clearInterval(timer);
+            var timer = setInterval(function () {
+                var i = 0;
+                    var  opc= setInterval(function () {
+                        if(i == 1) {
+                            clearInterval(opc);
+                        } else {
+                            i = i + 0.2;
+                        }
+                        for(var j = 0 ; j < oImg.length ; j++){
+                            if(speed == j){
+                                oImg[speed].style.opacity =i;
+                                oLi[speed].className = 'on';
+                                oImg[speed].style.filter = ' alpha(opacity='+(i*100)+')';
+                            } else {
+                                oImg[j].style.opacity = 0;
+                                oLi[j].className = '';
+                                oImg[speed].style.filter = ' alpha(opacity=0)';
+                            }
+                        }
+                    },100);
+                    i= 0;
+                    if(speed < oImg.length -1) {
+                        speed++;
+                    } else {
+                        speed = 0;
+                    }
+            },2500);
+        };
+        play();
+    </script>
+</body>
+</html>
