@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择地址</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        ul,li { list-style: none;}
+        li { display: inline-block;}
+        li i{ border: 1px solid #ff6600;}
+        #content { width: 1200px;}
+        #content span { cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div id="content">
+        <strong>热门的目的地:</strong> <span>北京</span> <span>上海</span> <span>杭州</span> <span>深圳</span>
+    </div>
+    <script>
+        var oName = document.querySelectorAll('#content span');
+        var content = document.getElementById('content');
+        var oBox = document.createElement('ul');
+        oBox.id = 'box';
+        for(var i = 0 ; i < oName.length ; i++) {
+            oName[i].on = i;
+            oName[i].onclick = function () {
+                var oLi = document.createElement('li');
+                var oHtml  = document.createElement('strong');
+                var oDel = document.createElement('i');
+                oHtml.innerHTML = oName[this.on].innerHTML;
+                oDel.innerHTML = 'X';
+                var oBoxLi  = document.querySelectorAll('#box li');
+                console.log(oBoxLi.length);
+                var bool = false;
+                for(var i = 0 ; i <= oBoxLi.length; i++) {
+                    console.log(oBoxLi[i]);
+                    if(oBoxLi[i] != undefined) {
+                        if (oBoxLi[i].innerHTML != oName[this.on].innerHTML) {
+                            var html = oHtml.appendChild(oDel);
+                            console.log(html);
+                            oLi.appendChild(oHtml);
+                            oBox.appendChild(oLi);
+                        }
+                    } else {
+                        if (!bool) {
+                            oLi.appendChild(oHtml.appendChild(oDel));
+                            oBox.appendChild(oLi);
+                        }
+                        bool = true;
+                    }
+                }
+                content.appendChild(oBox);
+            }
+        }
+    </script>
+</body>
+</html>
