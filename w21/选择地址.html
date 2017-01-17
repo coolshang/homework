@@ -21,34 +21,28 @@
         var content = document.getElementById('content');
         var oBox = document.createElement('ul');
         oBox.id = 'box';
-        var bool = false;
         for(var i = 0 ; i < oName.length ; i++) {
             oName[i].on = i;
+            oName[i].ifAdd = false;
             oName[i].onclick = function () {
-                var oLi = document.createElement('li');
-                var oHtml = document.createElement('strong');
-                var oDel = document.createElement('i');
-                oHtml.innerHTML = oName[this.on].innerHTML;
-                oDel.innerHTML = 'X';
-                var oBoxLi = document.querySelectorAll('#box li');
-                console.log(oBoxLi);
-                for (var i = this.on; i <= oBoxLi.length; i++) {
-                    if (oBoxLi[i] != undefined) {
-                        if (oName[this.on].innerHTML !== oBoxLi[i].children[0].innerHTML) {
-                            oLi.appendChild(oHtml);
-                            oLi.appendChild(oDel);
-                            oBox.appendChild(oLi);
-                        }
-                    } else {
-                        if (!bool) {
-                            oLi.appendChild(oHtml);
-                            oLi.appendChild(oDel);
-                            oBox.appendChild(oLi);
-                        }
-                        bool = true;
-                    }
+                if(!this.ifAdd) {
+                    var oLi = document.createElement('li');
+                    var oHtml = document.createElement('strong');
+                    var oDel = document.createElement('i');
+                    oHtml.innerHTML = this.innerHTML;
+                    oDel.innerHTML = 'X';
+                    oLi.appendChild(oHtml);
+                    oLi.appendChild(oDel);
+                    oDel.index = this.on;
+                    oDel.onclick = function(){
+                        var p = this.parentNode;
+                        p.parentNode.removeChild(p);
+                        oName[this.index].ifAdd = false;
+                    };
+                    oBox.appendChild(oLi);
+                    content.appendChild(oBox);
+                    this.ifAdd = !this.ifAdd;
                 }
-                content.appendChild(oBox);
             }
         }
     </script>
