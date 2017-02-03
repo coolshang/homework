@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小球的运动</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        #box{ position: relative; left: 0; top: 0;}
+        #box div{  width: 50px; height: 50px; border-radius: 100%; background: rgb(0,0,0); position: absolute; left: 0; top: 0;}
+    </style>
+</head>
+<body>
+    <div id="box">
+    </div>
+    <script>
+        var oBox = document.getElementById('box');
+        var speed = 0,leftMax = 0 ,topMax = 0;
+        reSize();
+        window.onresize = reSize;//窗口大小发生改变的时候触发
+        for(var i = 0; i < 9; i++){
+            var oDiv = document.createElement('div');
+            oDiv.leftNum = oDiv.topNum = i+1;
+            getColor(oDiv);
+            oBox.append(oDiv);
+        };
+        function getColor(obj,num) {
+            var arr = [];
+            for(var i = 0 ; i < 3; i++){
+                arr.push(Math.round(Math.random()*256));
+            }
+            obj.style.backgroundColor = "rgb("+arr[0]+','+arr[1]+','+arr[2]+')';
+        };
+        function reSize() {
+            topMax = document.documentElement.clientHeight - 50;
+            leftMax = document.documentElement.clientWidth - 50;
+        }
+        function getStyle(obj, attr) {
+            return obj.currentStyle?obj.currentStyle[attr]: getComputedStyle(obj)[attr];
+        };
+        var aBall = oBox.children;
+        setInterval(function () {
+            for (var i=0;i<aBall.length;i++ )
+            {
+                var left = aBall[i].offsetLeft + aBall[i].leftNum;
+                var top = aBall[i].offsetTop + aBall[i].topNum;
+                if ( left >= leftMax )
+                {
+                    left = leftMax;
+                    aBall[i].leftNum = - aBall[i].leftNum;
+                    getColor(aBall[i]);
+                }else if ( left <= 0 )
+                {
+                    left = 0;
+                    aBall[i].leftNum = - aBall[i].leftNum;
+                    getColor(aBall[i]);
+                };
+                if ( top >= topMax )
+                {
+                    top = topMax;
+                    aBall[i].topNum = - aBall[i].topNum;
+                    getColor(aBall[i]);
+                }else if ( top <= 0 )
+                {
+                    top = 0;
+                    aBall[i].topNum = - aBall[i].topNum;
+                    getColor(aBall[i]);
+                };
+                aBall[i].style.left = left + 'px';
+                aBall[i].style.top = top + 'px';
+            };
+        },30);
+    </script>
+</body>
+</html>
