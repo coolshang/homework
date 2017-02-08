@@ -13,59 +13,50 @@
     <div id="box">
     </div>
     <script>
-        var oBox = document.getElementById('box'),leftMax = 0 ,topMax = 0;
-        reSize();
-        window.onresize = reSize;//窗口大小发生改变的时候触发
+        var oBox = document.getElementById('box'),docTop = 0 ,docLeft = 0;
+        docSize();
+        window.onresize = docSize;
         for(var i = 0; i < 9; i++){
             var oDiv = document.createElement('div');
-            oDiv.leftNum = oDiv.topNum = i+1;
+            oDiv.lNum = oDiv.tNum = (i+1)*3;
             getColor(oDiv);
             oBox.append(oDiv);
         };
-        function getColor(obj,num) {
+        function getColor(obj) {
             var arr = [];
             for(var i = 0 ; i < 3; i++){
                 arr.push(Math.round(Math.random()*256));
             }
             obj.style.backgroundColor = "rgb("+arr[0]+','+arr[1]+','+arr[2]+')';
         };
-        function reSize() {
-            topMax = document.documentElement.clientHeight - 50;
-            leftMax = document.documentElement.clientWidth - 50;
+        function docSize() {
+            docTop = document.documentElement.clientHeight - 50;
+            docLeft = document.documentElement.clientWidth - 50;
         }
-        function getStyle(obj, attr) {
-            return obj.currentStyle?obj.currentStyle[attr]: getComputedStyle(obj)[attr];
-        };
-        var aBall = oBox.children;
+        var oChild = oBox.children;
         setInterval(function () {
-            for (var i=0;i<aBall.length;i++ )
-            {
-                var left = aBall[i].offsetLeft + aBall[i].leftNum;
-                var top = aBall[i].offsetTop + aBall[i].topNum;
-                if ( left >= leftMax )
-                {
-                    left = leftMax;
-                    aBall[i].leftNum = - aBall[i].leftNum;
-                    getColor(aBall[i]);
-                }else if ( left <= 0 )
-                {
+            for (var i=0;i<oChild.length;i++ ) {
+                var left = oChild[i].lNum+oChild[i].offsetLeft;
+                var top = oChild[i].tNum+oChild[i].offsetTop;
+                if(left >= docLeft){
+                    left = docLeft;
+                    oChild[i].lNum = -oChild[i].lNum;                    getColor( oChild[i]);
+                } else if( left <= 0){
                     left = 0;
-                    aBall[i].leftNum = - aBall[i].leftNum;
-                    getColor(aBall[i]);
+                    oChild[i].lNum = -oChild[i].lNum;
+                    getColor( oChild[i]);
                 };
-                if ( top >= topMax )
-                {
-                    top = topMax;
-                    aBall[i].topNum = - aBall[i].topNum;
-                    getColor(aBall[i]);
-                }else if ( top <= 0 )
-                {
+                if(top >= docTop){
+                    top = docTop;
+                    oChild[i].tNum = -oChild[i].tNum;
+                    getColor( oChild[i]);
+                } else if( top <= 0){
                     top = 0;
-                    aBall[i].topNum = - aBall[i].topNum;
-                    getColor(aBall[i]);
+                    oChild[i].tNum = -oChild[i].tNum;
+                    getColor( oChild[i]);
                 };
-                aBall[i].style.left = left + 'px';
-                aBall[i].style.top = top + 'px';
+                oChild[i].style.left = left + 'px';
+                oChild[i].style.top = top + 'px';
             };
         },30);
     </script>

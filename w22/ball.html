@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小球的运动</title>
+    <style>
+        *{ margin: 0; padding: 0;}
+        #ballBox { position: absolute; left: 0; top: 0;}
+        #ballBox div { position: absolute; left: 0; top: 0; width: 50px; height: 50px; border-radius: 100%;}
+    </style>
+</head>
+<body>
+    <div id="ballBox"></div>
+    <script>
+        var oBall = document.querySelector('#ballBox'),leftMax = 0,topMax = 0;
+        reSize();
+        window.onresize = reSize;
+        function reSize() {
+            leftMax = document.documentElement.clientWidth - 50;
+            topMax = document.documentElement.clientHeight - 50;
+        }
+        for(var i = 0 ; i < 10; i++) {
+            var oDiv = document.createElement('div');
+            oDiv.leftNum = oDiv.topNum = i+1;
+            getBg(oDiv);
+            oBall.append(oDiv);
+
+        }
+        function getBg(obj) {
+            var r = Math.round(Math.random()*256) ,g =  Math.round(Math.random()*256) , b =  Math.round(Math.random()*256);
+            obj.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
+        }
+        var aBall = oBall.children;
+        setInterval(function () {
+            for (var i  = 0 ; i < aBall.length ; i++) {
+                var left = aBall[i].offsetLeft+ aBall[i].leftNum;
+                var top = aBall[i].offsetTop + aBall[i].topNum;
+                if( left >= leftMax){
+                    left = leftMax;
+                    aBall[i].leftNum = - aBall[i].leftNum;
+                    getBg(aBall[i]);
+                } else if ( left <= 0) {
+                    left = 0;
+                    aBall[i].leftNum = - aBall[i].leftNum;
+                    getBg(aBall[i]);
+                };
+                if( top >= topMax){
+                    top = topMax;
+                    aBall[i].topNum = - aBall[i].topNum;
+                    getBg(aBall[i]);
+                } else if ( top <= 0) {
+                    top = 0;
+                    aBall[i].topNum = - aBall[i].topNum;
+                    getBg(aBall[i]);
+                };
+                aBall[i].style.left = left+'px';
+                aBall[i].style.top = top+'px';
+            }
+        },30);
+    </script>
+</body>
+</html>
