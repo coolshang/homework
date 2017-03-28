@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #oBox{ width: 100px; height: 100px; background:red; }
+    </style>
+</head>
+<body>
+    <div id="oBox"></div>
+<script>
+    var oBox = document.getElementById('oBox');
+    addEvent(oBox,'click',fn);
+    function addEvent(obj,eName,eFn){
+        if(document.addEventListener) {
+            obj.addEventListener(eName,eFn);
+        } else {
+            obj.attachEvent('on'+eName,eFn);
+        }
+    }
+    function removeEvent(obj,eName,eFn){
+        if(document.removeEventListener){
+            obj.removeEventListener(eName,eFn);
+        } else {
+            obj.detachEvent('on'+eName,eFn);
+        }
+    }
+    function fn(){
+        alert(1);
+    }
+</script>
+</body>
+</html>
